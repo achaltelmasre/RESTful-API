@@ -21,40 +21,106 @@ app.get('/health', (req, res) => {
     });
 });
 
-app.post("/bookings", async (req, res) => {
-    // const {} = res.body;
-    // create booking
+app.get('/api/v1/buses', (req, res) =>{
+    res.send({
+       success: true,
+       data: [
+        {
+            id: 1,
+            name: 'Bus 1',
+            seats: 20,
+        },
+        {
+            id: 2,
+            name: 'Bus 2',
+            seat: 20,
+        }
+       ],
+       message: 'Buses fetched'
+    });
+});
 
-    res.json({
-        success: true,
-        data: {},
-        message: 'Booking created'
-    })
- });
+app.get("/api/v2/buses", (req, res) =>{
+  res.send({
+    success: true,
+    data: [
+        {
+          id: 1,
+          name: 'Bus 1',
+          totalSeats: 20,
+        },
+        {
+            id: 2,
+            name: 'Bus 2',
+            totalSeats: 20,
+        }
+    ],
+    message: 'Buses fetched'
+  });
+});
 
- app.get("/bookings", async (req, res)=>{
+ app.get("/api/bookings", async (req, res)=>{
    //get all booking 
    res.json({
     success: true,
     date: [],
     message: 'Bookings fetched'
    })
- })
+ });
 
- app.get("/bookings/:id", async (req, res) => {
+ app.get("/api/booking/:id", async (req, res) => {
     //get single booking
-    const {} = req.params;
+    const {id} = req.params;
+
     req.json({
         success: true,
         data: {
-            id: req.params.id
+         id: id
         },
         message: 'Booking fetched'
     })
- })
+ });
+
+app.put("/api/booking/:id", async (req, res)=>{
+    //update booking
+    const {id} = req.params;
+
+    res.json({
+       success: true,
+       data: {
+        id: id
+       },
+       message: 'Booking update'
+    })
+  });
+
+  app.patch("/api/bookings/:id", async (req, res)=>{
+    //update booking
+    const {id} = req.params;
+
+    res.json({
+        success: true,
+        data: {
+          id: id
+        },
+        message: 'Booking updtate'
+    })
+  });
+
+  app.delete("/api/booking/:id", async (req, res) =>{
+    //delete booking
+    const {id} = req.params;
+
+    res.json({
+        success: true,
+        data: {
+            id: id
+        },
+        message: 'Booking deleted'
+    })
+  });
 
 const PORT = process.env.PORT || 5000;
-
 app.listen(PORT, () => {
     console.log(`Server running on port: ${PORT}`)
    
