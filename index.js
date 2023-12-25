@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import { getApiHealth } from './controllers/health.js';
-import { postApiBuses } from './controllers/bus.controller.js';
+import { postApiBuses, getApiBusesv1, getApiBusesv2 } from './controllers/bus.controller.js';
 
 const app = express();
 app.use(express.json());
@@ -22,43 +22,9 @@ app.get('/health', getApiHealth);
 //post/ bus
 app.post('/api/buses', postApiBuses);
 
-app.get('/api/v1/buses', (req, res) =>{
-    res.send({
-       success: true,
-       data: [
-        {
-            id: 1,
-            name: 'Bus 1',
-            seats: 20,
-        },
-        {
-            id: 2,
-            name: 'Bus 2',
-            seat: 20,
-        }
-       ],
-       message: 'Buses fetched'
-    });
-});
+app.get('/api/v1/buses', getApiBusesv1);
 
-app.get("/api/v2/buses", (req, res) =>{
-  res.send({
-    success: true,
-    data: [
-        {
-          id: 1,
-          name: 'Bus 1',
-          totalSeats: 20,
-        },
-        {
-            id: 2,
-            name: 'Bus 2',
-            totalSeats: 20,
-        }
-    ],
-    message: 'Buses fetched'
-  });
-});
+app.get("/api/v2/buses", getApiBusesv2 );
 
  app.get("/api/bookings", async (req, res)=>{
    //get all booking 

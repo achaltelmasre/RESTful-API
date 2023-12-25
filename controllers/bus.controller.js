@@ -31,4 +31,49 @@ const postApiBuses = async (req, res) => {
     }
 }
 
-export { postApiBuses }
+//get/buses/v1
+const getApiBusesv1 = async  (req, res) =>{
+    return responder({
+         res,
+         success: true,
+         data: [
+          {
+              id: 1,
+              name: 'Bus 1',
+              seats: 20,
+          },
+          {
+              id: 2,
+              name: 'Bus 2',
+              seat: 20,
+          }
+         ],
+         message: 'Buses fetched'
+    });
+}
+
+//get/buses/v1
+const getApiBusesv2 = async (req, res) =>{
+     return responder({
+          res,
+          success: true,
+      data: [
+          {
+            id: 1,
+            name: 'Bus 1',
+            totalSeats: 20,
+          },
+          {
+              id: 2,
+              name: 'Bus 2',
+              totalSeats: 20,
+          }
+      ],
+      message: 'Buses fetched'
+     })
+   
+  }
+
+
+
+export { postApiBuses, getApiBusesv1, getApiBusesv2 }
