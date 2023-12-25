@@ -3,6 +3,9 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
 
+import { getApiHealth } from './controllers/health.js';
+import { postApiBuses } from './controllers/bus.controller.js';
+
 const app = express();
 app.use(express.json());
 
@@ -14,12 +17,10 @@ const connectDB = async () => {
 };
 connectDB();
 
-app.get('/health', (req, res) => {
-    res.send({
-        success: true,
-        message: 'Server is running'
-    });
-});
+app.get('/health', getApiHealth);
+
+//post/ bus
+app.post('/api/buses', postApiBuses);
 
 app.get('/api/v1/buses', (req, res) =>{
     res.send({
