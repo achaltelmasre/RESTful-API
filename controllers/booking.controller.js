@@ -126,7 +126,7 @@ const deleteApiBooking = async (req, res) =>{
           message: 'Booking deleted' 
       })
   
-  }
+ }
 
    
 
